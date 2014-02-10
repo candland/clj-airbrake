@@ -13,6 +13,10 @@
   "Host to send the errors to."
   (atom "airbrakeapp.com"))
 
+(def api-protocol
+  "Protocol to send the errors to."
+  (atom "http://"))
+
 ;; TODO: replace with alter-var-root or get rid of this completely
 (defn set-host! [new-host]
   (reset! api-host new-host))
@@ -76,7 +80,7 @@
 (defn- parse-xml [xml-str]
   (-> xml-str java.io.StringReader. org.xml.sax.InputSource. xml/parse zip/xml-zip))
 
-(defn- get-url [host] (str "http://" (or host @api-host) "/notifier_api/v2/notices"))
+(defn- get-url [host] (str @api-protocol (or host @api-host) "/notifier_api/v2/notices"))
 
 (defn handle-response [response]
   (let [body-xml (-> response :body parse-xml)

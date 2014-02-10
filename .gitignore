@@ -6,3 +6,4 @@ classes
 README.html
 .lein*
 target
+*.swp
