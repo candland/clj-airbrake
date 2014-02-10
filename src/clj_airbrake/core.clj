@@ -21,6 +21,9 @@
 (defn set-host! [new-host]
   (reset! api-host new-host))
 
+(defn set-protocol! [new-protocol]
+  (reset! api-protocol new-protocol))
+
 (defn get-version []
   (or (System/getProperty "clj-airbrake.version")
       (let [props (doto (java.util.Properties.)
